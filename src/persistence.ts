@@ -1,7 +1,7 @@
 import { RESEARCH, TOWERS, PERKS, TRAITS, SCARS, SCAR_STACK, researchAvailable, maxCore } from './content';
 import { nodeLevel, maxLevel } from './content';
 import { validBoard, boardSize } from './generation';
-import { MUSIC_GENRES } from './music';
+import { MUSIC_GENRES, decodeTrack } from './music';
 import { freshProfile, placementTiles, validateRules } from './model';
 import type { Board, Profile } from './types';
 function assert(value: unknown, message: string): asserts value {
@@ -96,7 +96,8 @@ export function validateSave(raw: unknown): Profile {
       [p.settings.musicVolume, p.settings.effectsVolume].every(
         (v) => v === undefined || (typeof v === 'number' && v >= 0 && v <= 1),
       ) &&
-      (p.settings.tutorial === undefined || integer(p.settings.tutorial, 99)),
+      (p.settings.tutorial === undefined || integer(p.settings.tutorial, 99)) &&
+      (p.settings.musicCode === undefined || decodeTrack(p.settings.musicCode) !== null),
     'settings',
   );
   assert(typeof p.onboarded === 'boolean' && typeof p.lastReceipt === 'string', 'metadata');

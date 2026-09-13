@@ -75,6 +75,22 @@ export interface MusicNote {
   delay: number;
 }
 export const MUSIC_GENRES = ['auto', ...GENRES.map((g) => g.id)] as const;
+/** A shareable track code: the three numbers that fully determine a score. */
+export interface TrackCode {
+  seed: number;
+  sector: number;
+  arrangement: number;
+}
+const hex8 = (n: number) => (n >>> 0).toString(16).toUpperCase().padStart(8, '0');
+export const encodeTrack = (t: TrackCode) =>
+  `OVR-${hex8(t.seed)}-${String(t.sector).padStart(3, '0')}-${hex8(t.arrangement)}`;
+export function decodeTrack(code: string): TrackCode | null {
+  const m = /^\s*OVR-([0-9A-F]{8})-(\d{1,4})-([0-9A-F]{8})\s*$/i.exec(code);
+  if (!m) return null;
+  const sector = Number(m[2]);
+  if (sector > 999) return null;
+  return { seed: parseInt(m[1], 16), sector, arrangement: parseInt(m[3], 16) };
+}
 /** Genres are drawn at random per sector and arrangement; a reroll can change the genre too. */
 export const autoGenre = (seed: number, sector: number, arrangement = 0): Genre =>
   GENRES[
@@ -254,6 +270,34 @@ export function tunedFrequency(
  * Authored lead phrases repeat intact while the rhythm section varies per bar from the genre banks.
  */
 export const LAYERS = 5;
+/** Tempo factor for the calm, victory rendition of a score. */
+export const CALM_TEMPO = 0.8;
+/**
+ * The calm rendition: the same melody, key and tuning as the sector's score, played after a
+ * clear. Half-time drums with no snare crack, sustained bass, the lead an octave up with an
+ * echo, wide pads with a ninth, no fills or stabs.
+ */
+export function calmNotes(score: SectorScore, step: number): MusicNote[] {
+  const beat = step % 16,
+    bar = Math.floor(step / 16);
+  const random = rng(score.seed ^ Math.imul(step + 1, 0x27d4eb2d));
+  const chord = score.progression[bar % score.progression.length];
+  const notes: MusicNote[] = [];
+  const add = (instrument: Instrument, degree: number, duration: number, velocity: number, delay = 0) =>
+    notes.push({ instrument, hz: tunedFrequency(score, degree), duration, velocity, delay });
+  if (beat === 0 || beat === 8) add('kick', 0, 0.2, beat === 0 ? 0.16 : 0.11);
+  if (beat === 8) add('ghost', 0, 0.1, 0.05);
+  if (beat % 4 === 2) add('hat', 0, 0.05, 0.016);
+  if (beat === 0 || beat === 8) add('bass', chord - 7 + (beat === 8 && bar % 2 ? 4 : 0), 0.7, 0.1);
+  const note = score.melody.find((n) => n[0] === step % 64);
+  if (note) {
+    const duration = ((note[2] * 60) / (score.bpm * CALM_TEMPO) / 4) * 0.95;
+    add('lead', note[1] + 14, duration, 0.02 * (0.94 + random() * 0.12), random() * 0.006);
+    add('echo', note[1] + 14, duration * 0.7, 0.008, (60 / (score.bpm * CALM_TEMPO) / 4) * 3);
+  }
+  if (beat === 0) for (const offset of [0, 2, 4, 6, 8]) add('pad', chord + offset, 2.6, 0.03);
+  return notes;
+}
 export function musicNotes(score: SectorScore, step: number, intensity = LAYERS): MusicNote[] {
   const layer = Math.max(1, Math.min(LAYERS, Math.round(intensity)));
   const beat = step % 16,

@@ -2968,3 +2968,59 @@ td {
 .reduced-motion .tutorial-target {
   animation: none;
 }
+.code-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.code-row input {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  min-width: 250px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: #0b1216;
+  color: var(--lime);
+}
+.music-panel .music-now strong {
+  display: block;
+  color: var(--violet);
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+.music-panel .music-now small {
+  font-size: 9px;
+  letter-spacing: 0.5px;
+  color: #8ea6a1;
+}
+.music-layers {
+  display: flex;
+  gap: 4px;
+  margin: 10px 0;
+}
+.music-layers i {
+  flex: 1;
+  height: 5px;
+  background: #24303a;
+}
+.music-layers i.on {
+  background: var(--violet);
+}
+.music-panel .code-row input {
+  min-width: 0;
+  flex: 1;
+  font-size: 10px;
+}
+.music-panel .button-row {
+  margin-top: 10px;
+  gap: 12px;
+}
+.home-music .code-row {
+  margin-top: 8px;
+}
+.home-music .code-row input {
+  min-width: 0;
+  flex: 1;
+}

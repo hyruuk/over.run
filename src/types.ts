@@ -105,6 +105,8 @@ export interface Profile {
     musicVariant?: number;
     /** Tutorial progress: step index, 99 when finished or skipped, undefined before it is started. */
     tutorial?: number;
+    /** A pasted track code that locks the music to one score until the music is reset. */
+    musicCode?: string;
   };
   onboarded: boolean;
 }

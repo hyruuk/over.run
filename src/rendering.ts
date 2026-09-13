@@ -493,7 +493,15 @@ export class BoardRenderer {
       c.textAlign = 'center';
       c.fillStyle = def.color;
       c.font = `${s * 0.17}px monospace`;
-      c.fillText('▰'.repeat(t.level), x, y + s * 0.66);
+      c.fillText('▰'.repeat(t.level), x, y + s * 0.54);
+      // The module id, as routines reference it. Never smaller than 9px, so it stays legible on big boards.
+      const label = Math.max(9, s * 0.28);
+      c.font = `600 ${label}px "IBM Plex Mono", ui-monospace, monospace`;
+      const width = c.measureText(t.id).width + label * 0.8;
+      c.fillStyle = 'rgba(6, 12, 14, 0.82)';
+      c.fillRect(x - width / 2, y + s * 0.6, width, label * 1.35);
+      c.fillStyle = t.id === this.selected ? '#f2f9e8' : def.color;
+      c.fillText(t.id, x, y + s * 0.6 + label * 1.02);
       if ('offline' in t && typeof t.offline === 'number' && t.offline > 0) {
         c.fillStyle = '#76e0ce';
         c.font = `${s * 0.2}px monospace`;

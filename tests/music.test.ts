@@ -194,3 +194,43 @@ test('bars vary: alternate patterns, fills on phrase ends, and swing only in swu
       musicNotes(dnb, step).every((n) => n.instrument === 'lead' || n.instrument === 'echo' || n.delay === 0),
     );
 });
+
+test('track codes round-trip and reproduce the score exactly', async () => {
+  const { encodeTrack, decodeTrack } = await import('../src/music');
+  const track = { seed: 0x52c44db4, sector: 7, arrangement: 7919 * 3 };
+  const code = encodeTrack(track);
+  assert.match(code, /^OVR-[0-9A-F]{8}-\d{3}-[0-9A-F]{8}$/);
+  assert.deepEqual(decodeTrack(code), track);
+  assert.deepEqual(decodeTrack(` ${code.toLowerCase()} `), track);
+  assert.equal(decodeTrack('OVR-1234-5-6'), null);
+  assert.equal(decodeTrack('nope'), null);
+  const decoded = decodeTrack(code)!;
+  assert.deepEqual(
+    generateScore(decoded.seed, decoded.sector, decoded.arrangement),
+    generateScore(track.seed, track.sector, track.arrangement),
+  );
+});
+
+test('the calm rendition keeps the melody and key but drops the snare, fills and stabs', async () => {
+  const { calmNotes } = await import('../src/music');
+  const score = generateScore(11, 6);
+  const calm = new Set<string>(),
+    full = new Set<string>();
+  const calmLead: number[] = [],
+    fullLead: number[] = [];
+  for (let step = 0; step < 256; step++) {
+    for (const n of calmNotes(score, step)) {
+      calm.add(n.instrument);
+      if (n.instrument === 'lead') calmLead.push(n.hz);
+    }
+    for (const n of musicNotes(score, step)) {
+      full.add(n.instrument);
+      if (n.instrument === 'lead') fullLead.push(n.hz);
+    }
+  }
+  for (const i of ['snare', 'clap', 'stab', 'ohat', 'perc', 'tom']) assert.ok(!calm.has(i), i);
+  assert.ok(calm.has('lead') && calm.has('pad') && calm.has('bass') && full.has('lead'));
+  assert.equal(calmLead.length, fullLead.length, 'same melody');
+  for (let i = 0; i < calmLead.length; i++)
+    assert.ok(Math.abs(calmLead[i] / fullLead[i] - 2) < 1e-6, 'one octave up');
+});

@@ -292,8 +292,16 @@ test('production bundle launches its worker and retains the preparation checkpoi
 
 /** The home screen greets every session; tests that need the console start a run from it. */
 async function enter(page: Page) {
-  const start = page.locator('.home-actions .launch');
-  if (await start.isVisible()) await start.click();
+  for (let attempt = 0; attempt < 4; attempt++) {
+    const start = page.locator('.home-actions .launch');
+    if (await start.isVisible()) await start.click();
+    try {
+      await page.locator('.workspace').waitFor({ timeout: 5000 });
+      return;
+    } catch {
+      /* the click may have landed during boot; try again */
+    }
+  }
   await page.locator('.workspace').waitFor();
 }
 test('death screen retries at sector 000 with no research after reload', async ({ page }) => {
