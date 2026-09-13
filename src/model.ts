@@ -58,6 +58,26 @@ export const profileLoadout = (p: Profile): Loadout => ({
   traits: p.traits,
   scars: p.scars,
 });
+/** Parses a seed typed by the player: decimal or 0x-prefixed hex, 32-bit unsigned. */
+export function parseSeed(text: string): number {
+  const t = text.trim();
+  const n = /^0x[0-9a-f]{1,8}$/i.test(t) ? parseInt(t, 16) : /^\d{1,10}$/.test(t) ? Number(t) : NaN;
+  if (!Number.isInteger(n) || n < 0 || n > 0xffffffff)
+    throw new Error('Seed must be 0–4294967295 or 0x00000000–0xFFFFFFFF.');
+  return n;
+}
+export const formatSeed = (seed: number) => `0x${seed.toString(16).toUpperCase().padStart(8, '0')}`;
+/**
+ * Every sector layout, encounter, draft and score derives from the run seed, so the same seed
+ * and the same decisions replay identically. Changing it rewires every sector, so it applies
+ * only between attempts and drops cached layouts.
+ */
+export function setSeed(p: Profile, seed: number) {
+  if (p.active) throw new Error('Finish or disconnect the current attempt before changing the seed.');
+  if (!Number.isInteger(seed) || seed < 0 || seed > 0xffffffff) throw new Error('Invalid seed.');
+  p.seed = seed;
+  p.boards = {};
+}
 export function startAttempt(profile: Profile, level: number): Attempt {
   if (!Number.isSafeInteger(level) || level < 1 || level > profile.unlocked)
     throw new Error('This sector is locked.');

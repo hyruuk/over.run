@@ -390,3 +390,25 @@ test('tutorial steps advance only when their goal is met and skip already satisf
   assert.equal(tutorialActive(p), false);
   assert.ok(TUTORIAL.every((s) => s.title && s.text && s.targets.length));
 });
+
+test('the run seed is configurable between attempts and fully determines the run', async () => {
+  const { setSeed, parseSeed, formatSeed } = await import('../src/model');
+  const { generateScore } = await import('../src/music');
+  assert.equal(parseSeed('0x0000002A'), 42);
+  assert.equal(parseSeed(' 42 '), 42);
+  assert.throws(() => parseSeed('4294967296'), /Seed/);
+  assert.throws(() => parseSeed('abc'), /Seed/);
+  assert.equal(formatSeed(42), '0x0000002A');
+  const p = freshProfile(1);
+  startAttempt(p, 1);
+  assert.throws(() => setSeed(p, 5), /attempt/);
+  settle(p, p.active!.id, false);
+  setSeed(p, 5);
+  assert.deepEqual(p.boards, {});
+  const a = startAttempt(p, 1);
+  const b = startAttempt(Object.assign(freshProfile(5), { attempts: p.attempts - 1 }), 1);
+  assert.deepEqual(a.board, b.board);
+  assert.equal(a.seed, b.seed, 'attempt seeds derive from the run seed and the attempt count');
+  assert.deepEqual(generateScore(p.seed, 0), generateScore(5, 0));
+  assert.deepEqual(validateSave(p), p);
+});
