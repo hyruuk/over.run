@@ -1,6 +1,6 @@
 {
   "browserName": "chromium",
-  "date": "2026-09-13T17:31:06.812Z",
+  "date": "2026-09-13T18:02:55.782Z",
   "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36",
   "viewport": "980×630 battlefield, DPR 1",
   "results": [
@@ -9,8 +9,8 @@
       "records": 10000,
       "population": 10000,
       "renderMode": "WebGL2",
-      "measuredDrawsPerSecond": 33.5,
-      "p95DrawSubmissionMs": 2.7,
+      "measuredDrawsPerSecond": 28.7,
+      "p95DrawSubmissionMs": 4.4,
       "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
     },
     {
@@ -18,7 +18,7 @@
       "records": 1000,
       "population": 1000000,
       "renderMode": "WebGL2",
-      "measuredDrawsPerSecond": 32.1,
+      "measuredDrawsPerSecond": 26.9,
       "p95DrawSubmissionMs": 2.4,
       "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
     }

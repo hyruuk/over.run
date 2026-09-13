@@ -1,12 +1,41 @@
+/* Self-hosted, SIL Open Font License: see public/fonts/OFL-*.txt */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/IBMPlexMono-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/IBMPlexMono-Italic.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/IBMPlexMono-Medium.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/IBMPlexMono-SemiBold.ttf') format('truetype');
+}
+@font-face {
+  font-family: Orbitron;
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url('/fonts/Orbitron-Variable.ttf') format('truetype');
+}
 :root {
-  font-family:
-    Inter,
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    sans-serif;
+  font-family: var(--mono);
   color: #d5dedb;
   background: #090e12;
   font-synthesis: none;
@@ -19,7 +48,9 @@
   --violet: #c6a0ff;
   --gold: #e9c877;
   --blue: #7bdde9;
-  font-size: 13px;
+  --mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  --display: Orbitron, 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 12.5px;
   color-scheme: dark;
 }
 * {
@@ -81,7 +112,7 @@ p {
 h1 {
   font-size: 27px;
   letter-spacing: -0.9px;
-  font-weight: 580;
+  font-weight: 600;
   margin-bottom: 8px;
   display: flex;
   align-items: center;
@@ -94,7 +125,7 @@ h2 {
 }
 h3 {
   font-size: 15px;
-  font-weight: 550;
+  font-weight: 500;
   margin-bottom: 10px;
 }
 p {
@@ -120,7 +151,7 @@ footer,
 .routine-index,
 .event-log,
 .research-node > small {
-  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  font-family: var(--mono);
 }
 .topbar {
   height: 85px;
@@ -145,6 +176,12 @@ footer,
 }
 .brand-white {
   color: #e6eeea;
+}
+.wordmark,
+.home-copy h1 {
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 .brand small {
   display: block;
@@ -199,7 +236,7 @@ footer,
   color: #e2efda;
 }
 .nav-count {
-  font: 10px monospace;
+  font: 10px var(--mono);
   border: 1px solid #33413b;
   padding: 2px 5px;
 }
@@ -251,7 +288,7 @@ footer,
   justify-content: center;
   gap: 9px;
   font-size: 12px;
-  font-weight: 550;
+  font-weight: 500;
   white-space: nowrap;
 }
 .button:hover:not(:disabled) {
@@ -262,7 +299,7 @@ footer,
   background: var(--lime);
   border-color: var(--lime);
   color: #172210;
-  font-weight: 650;
+  font-weight: 600;
 }
 .button.primary:hover:not(:disabled) {
   background: #d0ffa1;
@@ -422,7 +459,7 @@ main {
 .resource strong {
   font-size: 22px;
   line-height: 1;
-  font-weight: 550;
+  font-weight: 500;
   letter-spacing: -0.5px;
 }
 .resource em {
@@ -516,7 +553,7 @@ main {
   height: 35px;
   border: 1px solid color-mix(in srgb, var(--tower) 40%, transparent);
   background: color-mix(in srgb, var(--tower) 6%, #11191a);
-  font: 10px monospace;
+  font: 10px var(--mono);
   clip-path: polygon(15% 0, 85% 0, 100% 15%, 100% 85%, 85% 100%, 15% 100%, 0 85%, 0 15%);
 }
 .defense-copy {
@@ -525,7 +562,7 @@ main {
 }
 .defense-copy strong {
   font-size: 11px;
-  font-weight: 550;
+  font-weight: 500;
   display: block;
   white-space: nowrap;
 }
@@ -537,7 +574,7 @@ main {
   margin-top: 6px;
 }
 .defense-cost {
-  font: 12px monospace;
+  font: 12px var(--mono);
   text-align: right;
   color: #cbd7c8;
   position: relative;
@@ -683,7 +720,7 @@ main {
   height: 25px;
   border: 1px solid #2a3838;
   border-radius: 3px;
-  font: 9px monospace;
+  font: 9px var(--mono);
   color: #5f7470;
 }
 .wave-step.current {
@@ -705,7 +742,7 @@ main {
   text-align: right;
 }
 .wave-status strong {
-  font: 14px monospace;
+  font: 14px var(--mono);
   color: #b2c8b8;
   display: block;
   margin-bottom: 7px;
@@ -723,7 +760,7 @@ main {
 }
 .forecast-wave {
   color: #86949b;
-  font: 9px monospace;
+  font: 9px var(--mono);
   margin: 23px 0 15px;
   display: flex;
   align-items: baseline;
@@ -853,7 +890,7 @@ main {
   color: #c0d0bd;
 }
 .field-label {
-  font: 8px monospace;
+  font: 8px var(--mono);
   color: #80978e;
   display: block;
   margin-bottom: 8px;
@@ -863,7 +900,7 @@ main {
   width: 100%;
 }
 .execution-bar {
-  margin-top: 20px;
+  margin: 0 0 21px;
   border: 1px solid #34432f;
   border-radius: 5px;
   background: linear-gradient(100deg, #141e19, #111912);
@@ -905,7 +942,7 @@ main {
   border-radius: 4px;
 }
 .speed-control button {
-  font: 10px monospace;
+  font: 10px var(--mono);
   border: 0;
   border-radius: 2px;
   background: transparent;
@@ -946,7 +983,7 @@ main {
 }
 .onboarding strong {
   color: #b1c7a5;
-  font-weight: 550;
+  font-weight: 500;
 }
 .onboarding .text-button {
   white-space: nowrap;
@@ -1166,7 +1203,7 @@ footer .status-dot {
   border-color: #5a7846;
 }
 .node-rank {
-  font: 9px monospace;
+  font: 9px var(--mono);
   color: var(--branch);
 }
 .template-bar {
@@ -1176,7 +1213,7 @@ footer .status-dot {
   margin: 20px 0;
 }
 .template-bar > span {
-  font: 8px monospace;
+  font: 8px var(--mono);
   color: #71887f;
   letter-spacing: 0.5px;
   margin-right: auto;
@@ -1288,7 +1325,7 @@ footer .status-dot {
   text-align: center;
   border-top: 1px solid #68845c;
   height: 1px;
-  font: 15px monospace;
+  font: 15px var(--mono);
   line-height: 0;
 }
 .node-port {
@@ -1345,7 +1382,7 @@ input[type='range'] {
   border-color: #95b875;
 }
 .sector-card strong {
-  font: 13px monospace;
+  font: 13px var(--mono);
   letter-spacing: 1px;
 }
 .sector-card small {
@@ -1399,7 +1436,7 @@ input[type='range'] {
   transform: translateY(-2px);
 }
 .reward-select {
-  font: 9px monospace;
+  font: 9px var(--mono);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1440,7 +1477,7 @@ table {
   text-align: left;
 }
 th {
-  font: 9px monospace;
+  font: 9px var(--mono);
   color: #7e998b;
   padding: 11px;
   border-bottom: 1px solid #405247;
@@ -1536,7 +1573,7 @@ td {
   margin-bottom: 20px;
 }
 .help-steps b {
-  font: 22px monospace;
+  font: 22px var(--mono);
   color: #b0d994;
 }
 .help-steps h3 {
@@ -2173,16 +2210,16 @@ td {
 
 /* The executable is the identity: over.run → > run. */
 .brand .wordmark {
-  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
-  font-weight: 600;
-  font-size: 27px;
-  letter-spacing: -1.8px;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 23px;
+  letter-spacing: 1px;
 }
 .brand-run {
   color: var(--lime);
 }
 .run-command {
-  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  font-family: var(--mono);
   font-size: 18px;
   font-weight: 600;
   letter-spacing: -0.5px;
@@ -2205,7 +2242,7 @@ td {
   justify-content: space-between;
 }
 .execution-message strong:has(+ small) {
-  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  font-family: var(--mono);
   font-size: 11px;
 }
 .reduced-motion .command-cursor {
@@ -2240,7 +2277,7 @@ td {
 
 .routine-feedback {
   display: block;
-  font: 7px monospace;
+  font: 7px var(--mono);
   color: #6d8b77;
   margin: 10px 0;
   max-width: 75px;
@@ -2277,7 +2314,7 @@ td {
   width: 90px;
 }
 .sector-jump .button {
-  font-family: monospace;
+  font-family: var(--mono);
 }
 @media (max-width: 700px) {
   .sector-jump {
@@ -2334,7 +2371,7 @@ td {
 .discipline-tabs button small {
   display: block;
   margin-top: 5px;
-  font: 10px monospace;
+  font: 10px var(--mono);
   color: #80958e;
 }
 .discipline-tabs button[aria-selected='true'] {
@@ -2360,7 +2397,7 @@ td {
   font-size: 12px;
 }
 .discipline-heading > span {
-  font: 9px monospace;
+  font: 9px var(--mono);
   color: #93a6a4;
 }
 .research-bridges {
@@ -2373,7 +2410,7 @@ td {
 }
 .research-bridges > span {
   color: #768f89;
-  font: 9px monospace;
+  font: 9px var(--mono);
 }
 .research-scroll {
   overflow-x: auto;
@@ -2388,7 +2425,7 @@ td {
   grid-template-columns: repeat(3, 280px);
   gap: 30px;
   padding: 8px 0 18px;
-  font: 11px monospace;
+  font: 11px var(--mono);
   color: var(--discipline);
   text-transform: uppercase;
 }
@@ -2491,7 +2528,7 @@ td {
 }
 .perk-catalog article small {
   color: #afca8c;
-  font: 9px monospace;
+  font: 9px var(--mono);
 }
 .perk-catalog article.locked small {
   color: #8e9da9;
@@ -2514,7 +2551,7 @@ td {
   border-radius: 5px;
   background: linear-gradient(110deg, #10181d, #0d1418);
   padding: 13px 17px 12px;
-  margin-bottom: 21px;
+  margin: 21px 0 0;
 }
 .run-profile-heading {
   display: flex;
@@ -2525,7 +2562,7 @@ td {
   margin-bottom: 9px;
 }
 .run-profile-heading small {
-  font-family: ui-monospace, 'JetBrains Mono', Menlo, monospace;
+  font-family: var(--mono);
   font-size: 9px;
   letter-spacing: 0.6px;
   color: #8ea6a1;
@@ -2753,11 +2790,11 @@ td {
     radial-gradient(ellipse at 20% 0%, #172a1e, transparent 60%), linear-gradient(160deg, #0f1a1d, #0a1013);
 }
 .home-copy h1 {
-  font-size: clamp(46px, 8vw, 92px);
+  font-size: clamp(40px, 7vw, 84px);
   line-height: 0.95;
   margin: 18px 0 16px;
-  letter-spacing: -2px;
-  font-weight: 650;
+  letter-spacing: 1px;
+  font-weight: 800;
 }
 .home-tagline {
   max-width: 520px;
@@ -2805,7 +2842,7 @@ td {
 .home-stats dd {
   margin: 0;
   font-size: 20px;
-  font-weight: 550;
+  font-weight: 500;
   letter-spacing: -0.4px;
 }
 .home-music {
@@ -2838,7 +2875,7 @@ td {
   background: #0d1418;
 }
 .home-guide b {
-  font-family: ui-monospace, monospace;
+  font-family: var(--mono);
   color: var(--lime);
   font-size: 11px;
 }
