@@ -10,6 +10,7 @@
 export type Genre = 'dnb' | 'dubstep' | 'bass' | 'house' | 'garage';
 export interface GenreSpec {
   id: Genre;
+  /** The invented, player-facing style name; the id is the underlying genre and stays internal. */
   name: string;
   bpm: [number, number];
   /** Fraction of a sixteenth by which off-beat sixteenths are delayed. */
@@ -27,7 +28,7 @@ export interface GenreSpec {
 export const GENRES: GenreSpec[] = [
   {
     id: 'dnb',
-    name: 'Drum & bass',
+    name: 'Packetstep',
     bpm: [170, 176],
     swing: 0,
     halfTime: false,
@@ -85,7 +86,7 @@ export const GENRES: GenreSpec[] = [
   },
   {
     id: 'dubstep',
-    name: 'Dubstep',
+    name: 'Halfclock Sub',
     bpm: [138, 142],
     swing: 0,
     halfTime: true,
@@ -143,7 +144,7 @@ export const GENRES: GenreSpec[] = [
   },
   {
     id: 'bass',
-    name: 'UK bass',
+    name: 'Subroutine',
     bpm: [138, 150],
     swing: 0.05,
     halfTime: false,
@@ -201,7 +202,7 @@ export const GENRES: GenreSpec[] = [
   },
   {
     id: 'house',
-    name: 'House',
+    name: 'Fourbeat Daemon',
     bpm: [122, 128],
     swing: 0.1,
     halfTime: false,
@@ -259,7 +260,7 @@ export const GENRES: GenreSpec[] = [
   },
   {
     id: 'garage',
-    name: 'UK garage',
+    name: 'Shuffle Protocol',
     bpm: [130, 138],
     swing: 0.22,
     halfTime: false,
