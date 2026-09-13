@@ -1,0 +1,27 @@
+{
+  "browserName": "chromium",
+  "date": "2026-09-13T17:26:29.220Z",
+  "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36",
+  "viewport": "980×630 battlefield, DPR 1",
+  "results": [
+    {
+      "name": "10k visible individuals",
+      "records": 10000,
+      "population": 10000,
+      "renderMode": "WebGL2",
+      "measuredDrawsPerSecond": 29.6,
+      "p95DrawSubmissionMs": 3.2,
+      "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "name": "million represented swarm",
+      "records": 1000,
+      "population": 1000000,
+      "renderMode": "WebGL2",
+      "measuredDrawsPerSecond": 27.2,
+      "p95DrawSubmissionMs": 2.3,
+      "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    }
+  ],
+  "limitations": "Headless browser. Submission time is not GPU completion time. Software rendering is identified by GPU string; real-device FPS remains unverified."
+}

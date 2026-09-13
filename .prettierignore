@@ -1,0 +1,9 @@
+dist
+node_modules
+artifacts
+test-results
+playwright-report
+package-lock.json
+
+# Compact generated asset; reproduced by scripts/import-melodies.py
+src/data/melodies.json

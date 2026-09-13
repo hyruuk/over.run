@@ -1,0 +1,39 @@
+{
+  "date": "2026-09-13T05:02:33.998Z",
+  "node": "v24.15.0",
+  "cpu": "AMD Ryzen AI 9 HX 370 w/ Radeon 890M",
+  "platform": "linux",
+  "scope": "Headless simulation, no towers in these population stress cases. Not a GPU or frame-rate benchmark.",
+  "results": [
+    {
+      "name": "individuals",
+      "initialRecords": 10000,
+      "representedPopulation": 10000,
+      "ticks": 300,
+      "elapsedMs": 407,
+      "p95TickMs": 2.858,
+      "finalRecords": 10016,
+      "heapMB": 71.8
+    },
+    {
+      "name": "million swarm",
+      "initialRecords": 1000,
+      "representedPopulation": 1000000,
+      "ticks": 300,
+      "elapsedMs": 41,
+      "p95TickMs": 0.224,
+      "finalRecords": 1016,
+      "heapMB": 20.2
+    },
+    {
+      "name": "fragmented swarm",
+      "initialRecords": 4000,
+      "representedPopulation": 1000000,
+      "ticks": 300,
+      "elapsedMs": 67,
+      "p95TickMs": 0.69,
+      "finalRecords": 1016,
+      "heapMB": 14.3
+    }
+  ]
+}

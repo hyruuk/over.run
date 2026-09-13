@@ -1,0 +1,25 @@
+{
+  "name": "over-run",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "test": "node --import tsx --test --test-isolation=none tests/*.test.ts",
+    "test:e2e": "npm run build && playwright test",
+    "bench": "node --import tsx scripts/benchmark.ts",
+    "format": "prettier --write src tests scripts *.ts *.json index.html README.md docs",
+    "format:check": "prettier --check src tests scripts *.ts *.json index.html README.md docs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^22.20.2",
+    "fake-indexeddb": "^6.2.5",
+    "prettier": "^3.9.6",
+    "tsx": "^4.23.13",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.0"
+  }
+}
