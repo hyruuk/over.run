@@ -3011,7 +3011,12 @@ td {
 .music-panel .code-row input {
   min-width: 0;
   flex: 1;
-  font-size: 10px;
+  font-size: 8.5px;
+  letter-spacing: 0;
+  padding: 7px 6px;
+}
+.music-panel .code-row .button {
+  padding-inline: 10px;
 }
 .music-panel .button-row {
   margin-top: 10px;
